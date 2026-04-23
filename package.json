@@ -1,0 +1,23 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/mohammadrafeeshaik/create-react#readme",
+  "bugs": {
+    "url": "https://github.com/mohammadrafeeshaik/create-react/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohammadrafeeshaik/create-react.git"
+  },
+  "license": "ISC",
+  "author": "Rafee Shaik",
+  "type": "commonjs",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  }
+}
