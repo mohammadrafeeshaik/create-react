@@ -12,4 +12,4 @@ package-lock.json have EXACT dependency version
 # caret/tilde
 
 ^ Allows minor/patch updates
-~ Allos patch updates
+~ Allows patch updates
