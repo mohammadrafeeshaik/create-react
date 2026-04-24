@@ -49,5 +49,13 @@
 # JSX (Transplied before it reaches JS engine)
 
 React.createElement => React element-JS object => HTML element(render)
+const heading = React.createElement("h1", { id: "heading" }, "Learning React");
 
 JSX => React.createElement => React element-JS object => HTML element(render)
+const jsxHeading = (<h1 id="heading">Learning React JSX</h1>);
+
+# React component (2 types)
+
+    - Class based components
+    - Functional components (JS functions which returns some piece of JSX / React element)
+    Component composition (component within a component)
