@@ -48,11 +48,16 @@
 
 # JSX (Transplied before it reaches JS engine)
 
+import React from "react";
+import ReactDOM from "react-dom/client";
+
 React.createElement => React element-JS object => HTML element(render)
 const heading = React.createElement("h1", { id: "heading" }, "Learning React");
 
 JSX => React.createElement => React element-JS object => HTML element(render)
 const jsxHeading = (<h1 id="heading">Learning React JSX</h1>);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 # React component (2 types)
 
@@ -72,3 +77,21 @@ const jsxHeading = (<h1 id="heading">Learning React JSX</h1>);
     - Named
         - export const Header = () => {};
         - import {Header} from './components/Header';
+
+# Hooks
+
+    Hooks are normal JS utility functions given by React
+        - useState()    super powerful state variables given by React
+        - useEffect()
+
+import { useState } from "react";
+
+import { resList } from "../utils/mockData";
+
+const Body = () => {
+const [listOfRes, setListOfRes] = useState(resList);
+
+    const btnFilter = () =>
+    setListOfRes(listOfRes.filter((res) => res.info.avgRating > 4));
+
+}
