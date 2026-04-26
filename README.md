@@ -59,3 +59,16 @@ const jsxHeading = (<h1 id="heading">Learning React JSX</h1>);
     - Class based components
     - Functional components (JS functions which returns some piece of JSX / React element)
     Component composition (component within a component)
+
+# Exports/Imports
+
+    - Default
+    - Named
+
+    - Default
+        - export default Header;
+        - import Header from './components/Header';
+
+    - Named
+        - export const Header = () => {};
+        - import {Header} from './components/Header';

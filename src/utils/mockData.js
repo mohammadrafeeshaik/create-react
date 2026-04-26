@@ -1,21 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-const Header = () => {
-  return (
-    <header>
-      <div className="logo">LOGO</div>
-      <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact</li>
-        <li>Cart</li>
-      </ul>
-    </header>
-  );
-};
-
-const resList = [
+export const resList = [
   {
     info: {
       id: "37103",
@@ -1606,59 +1589,3 @@ const resList = [
   },
 ];
 // https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.38430&lng=78.45830&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING
-
-const RestaurantCard = (props) => {
-  console.log(props);
-  const { cloudinaryImageId, name, cuisines, costForTwo, avgRating, sla } =
-    props?.resData?.info;
-  return (
-    <li>
-      <div className="restaurant-item">
-        <div className="restaurant-img-wrapper">
-          <img
-            className="res-image"
-            src={
-              "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-              cloudinaryImageId
-            }
-            alt="res-image"
-          />
-        </div>
-        <div className="restaurant-details">
-          <h2>{name}</h2>
-          <p>{cuisines.join(", ")}</p>
-          <p>{avgRating} Stars</p>
-          <p>{costForTwo}</p>
-        </div>
-      </div>
-    </li>
-  );
-};
-
-const Body = () => {
-  return (
-    <main>
-      <div className="search">
-        <input type="text" placeholder="Search" />
-      </div>
-      <ul className="restaurant-list">
-        {resList.map((res) => (
-          <RestaurantCard key={res.info.id} resData={res} />
-        ))}
-      </ul>
-    </main>
-  );
-};
-
-const AppLayout = () => {
-  return (
-    <div className="app">
-      <Header />
-      <Body />
-    </div>
-  );
-};
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<AppLayout />);
