@@ -56,7 +56,7 @@ const heading = React.createElement("h1", { id: "heading" }, "Learning React");
 
 JSX => React.createElement => React element-JS object => HTML element(render);
 
-const jsxHeading = (<h1 id="heading">Learning React JSX</h1>);
+const jsxHeading = (<span id="heading">Learning React JSX</span>);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
