@@ -90,6 +90,8 @@
                 - If dependancy array is empty [], useEffect is called on inital render and only once
                 - If dependancy array is any variable, useEffect is called everytime when the variable changes
 
+---
+
     import { useState } from "react";
 
     import { resList } from "../utils/mockData";
