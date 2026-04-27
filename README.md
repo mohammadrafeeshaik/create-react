@@ -82,7 +82,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
     Hooks are normal JS utility functions given by React
         - useState()    super powerful state variables given by React
-        - useEffect()
+        - useEffect()   takes two arguments.
+            1. Callback fn () => {}
+            2. Dependancy array []
+                - If no dependancy array, useEffect is called on every render
+                - If dependancy array is empty [], useEffect is called on inital render and only once
+                - If dependancy array is any variable, useEffect is called everytime when the variable changes
 
 import { useState } from "react";
 
@@ -95,3 +100,18 @@ const [listOfRes, setListOfRes] = useState(resList);
     setListOfRes(listOfRes.filter((res) => res.info.avgRating > 4));
 
 }
+
+---
+
+import {useEffect} from 'react';
+
+const Body = () => {
+useEffect(() => {}, [])
+}
+
+Whenever a state variable updates, React will re-renders the component
+
+# Reconciliation a/g (React Fiber)
+
+    - Diff a/g (It finds the difference between two virtual DOMs)
+    - Virtual DOM -> It is a representation of actual DOM

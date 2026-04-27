@@ -74,3 +74,32 @@ main {
     font-size: 1rem;
   }
 }
+
+.shimmer.restaurant-list .restaurant-img-wrapper img {
+  animation: loading infinite 4s;
+}
+
+.shimmer.restaurant-list .restaurant-details {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.shimmer.restaurant-list .restaurant-details > * {
+  height: 1rem;
+  animation: loading infinite 4s;
+}
+
+@keyframes loading {
+  0% {
+    background: #dadada;
+  }
+
+  50% {
+    background: #a29e9e;
+  }
+
+  100% {
+    background: #dadada;
+  }
+}
