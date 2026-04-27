@@ -35,30 +35,30 @@
 
 # browserslist (browserslist.dev) support for browsers
 
-"browserslist": [
-"last 2 versions"
-]
+    "browserslist": [
+    "last 2 versions"
+    ]
 
 # npm scripts
 
-"scripts": {
-"start": "parcel index.html",
-"build": "parcel build index.html"
-}
+    "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+    }
 
 # JSX (Transplied before it reaches JS engine)
 
-import React from "react";
-import ReactDOM from "react-dom/client";
+    import React from "react";
+    import ReactDOM from "react-dom/client";
 
-React.createElement => React element-JS object => HTML element(render)
-const heading = React.createElement("h1", { id: "heading" }, "Learning React");
+    React.createElement => React element-JS object => HTML element(render)
+    const heading = React.createElement("h1", { id: "heading" }, "Learning React");
 
-JSX => React.createElement => React element-JS object => HTML element(render);
+    JSX => React.createElement => React element-JS object => HTML element(render);
 
-const jsxHeading = (&lt;h1&gt; id="heading">Learning React JSX&lt;/h1&gt;);
+    const jsxHeading = (&lt;h1&gt; id="heading">Learning React JSX&lt;/h1&gt;);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+    const root = ReactDOM.createRoot(document.getElementById("root"));
 
 # React component (2 types)
 
@@ -90,12 +90,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
                 - If dependancy array is empty [], useEffect is called on inital render and only once
                 - If dependancy array is any variable, useEffect is called everytime when the variable changes
 
-import { useState } from "react";
+    import { useState } from "react";
 
-import { resList } from "../utils/mockData";
+    import { resList } from "../utils/mockData";
 
-const Body = () => {
-const [listOfRes, setListOfRes] = useState(resList);
+    const Body = () => {
+    const [listOfRes, setListOfRes] = useState(resList);
 
     const btnFilter = () =>
     setListOfRes(listOfRes.filter((res) => res.info.avgRating > 4));
@@ -104,11 +104,11 @@ const [listOfRes, setListOfRes] = useState(resList);
 
 ---
 
-import {useEffect} from 'react';
+    import {useEffect} from 'react';
 
-const Body = () => {
-useEffect(() => {}, [])
-}
+    const Body = () => {
+    useEffect(() => {}, [])
+    }
 
 Whenever a state variable updates, React will re-renders the component
 
