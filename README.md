@@ -133,6 +133,10 @@ Whenever a state variable updates, React will re-renders the component
 
     - Link                  =>  is a named import which is used to navigate through the app
 
+    - useParams             =>  is a named import which is used to access dynamic parameters from current URL
+
+                                The useParams hook in react-router-dom is a built-in tool that allows you to access dynamic parameters from the current URL path. It returns an object of key/value pairs where the keys are the placeholders you defined in your route (e.g., :id) and the values are the actual data in the URL.
+
 ## createBrowserRouter, RouterProvider, useRouteError, Outlet imports
 
     import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
@@ -204,6 +208,10 @@ Whenever a state variable updates, React will re-renders the component
                     path: "/contact",
                     element: <Contact />,
                 },
+                {
+                    path: "/restaurants/:resId",
+                    element: <RestaurantMenu />,
+                },
             ],
             errorElement: <Error />,
         },
@@ -212,6 +220,15 @@ Whenever a state variable updates, React will re-renders the component
     const root = ReactDOM.createRoot(document.getElementById("root"));
 
     root.render(<RouterProvider router={appRouter} />);
+
+## useParams
+
+    import { useParams } from "react-router-dom";
+
+    const RestaurantMenu = () => {
+        const { resId } = useParams();
+        ...
+    }
 
 ## Link
 

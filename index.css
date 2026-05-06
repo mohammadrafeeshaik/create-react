@@ -49,6 +49,11 @@ main {
   grid-template-columns: repeat(4, 1fr);
 }
 
+.restaurant-list a {
+  color: #000;
+  text-decoration: none;
+}
+
 .restaurant-item {
   overflow: hidden;
   cursor: pointer;
@@ -69,10 +74,20 @@ main {
 }
 
 .restaurant-details {
+  position: relative;
   padding: 0.5rem;
   h2 {
     font-size: 1rem;
   }
+}
+
+.restaurant-offer {
+  position: absolute;
+  top: -2rem;
+  padding: 0.25rem;
+  display: inline-block;
+  color: #fff;
+  background-color: #5ad35a;
 }
 
 .shimmer.restaurant-list .restaurant-img-wrapper img {
@@ -102,4 +117,23 @@ main {
   100% {
     background: #dadada;
   }
+}
+
+.res-details {
+  padding: 2rem;
+}
+
+.res-details > * {
+  margin: 2rem;
+}
+
+.res-details ul li {
+  border-bottom: 1px solid #999;
+  padding: 1rem 0;
+}
+
+.item-card {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
 }
