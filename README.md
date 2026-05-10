@@ -238,5 +238,59 @@ Whenever a state variable updates, React will re-renders the component
 
 ## Routing
 
-    - Client Side Routing (React)
-    - Server Side Routing (Network calls)
+    -   Client Side Routing (React)
+    -   Server Side Routing (Network calls)
+
+# Class based components
+
+    -   It is a normal JS class which extends from React.Component which contains render method which returns
+        some piece of JSX.
+
+        <UserClass name={"Rafee"}>
+
+        import React from 'react';
+
+        class UserClass extends React.Component {
+            constructor(props) {
+                super(props)
+            }
+
+            render() {
+                return (
+                    <div>User Name: {this.props.name}</div>
+                );
+            }
+        }
+
+        export default UserClass
+
+# Life cycle methods of Class components [(constructor, render), componentDidMount]
+
+[Life cycle methods](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+
+    - Render Phase (Pure and has no side effects. May be paused, aborted or restarted by React.)
+    - Commit Phase (Can work with DOM, run side effects, schedule updates.)
+
+    - Parent constructor
+    - Parent render
+
+        - Child constructor
+        - Child render
+        - Child componentDidMount
+
+    - Parent componentDidMount
+
+--- If there are multiple child components, batching (constructor, render) of child components will takes place
+
+    - Parent constructor
+    - Parent render
+
+        - First Child constructor
+        - First Child render
+        - Second Child constructor
+        - Second Child render
+
+        - First Child componentDidMount
+        - Second Child componentDidMount
+
+    - Parent componentDidMount

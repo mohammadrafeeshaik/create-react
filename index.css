@@ -137,3 +137,9 @@ main {
   gap: 2rem;
   justify-content: space-between;
 }
+
+.card {
+  margin: 2rem;
+  border: 1px solid #999;
+  padding: 2rem;
+}
