@@ -253,23 +253,63 @@ Whenever a state variable updates, React will re-renders the component
         class UserClass extends React.Component {
             constructor(props) {
                 super(props)
+
+                this.state = {
+                    count: 0,
+                }
+            }
+
+            async componentDidMount() {
+                const data = await fetch('https://api.github.com/users/mohammadrafeeshaik');
+                const json = await data.json();
+                console.log(json);
             }
 
             render() {
+                const { count } = this.state;
+
                 return (
-                    <div>User Name: {this.props.name}</div>
+                    <div>
+                        <p>{count}</p>
+                        <button
+                            onClick={() => {
+                                this.setState({this.state.count + 1});
+                            }}>Increment</button>
+                        <div>User Name: {this.props.name}</div>
+                    </div>
                 );
             }
         }
 
-        export default UserClass
+        export default UserClass;
 
-# Life cycle methods of Class components [(constructor, render), componentDidMount]
+# Life cycle methods of Class components [Mounting, Updating, Unmounting]
 
-[Life cycle methods](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+    [Life cycle methods](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+
+    Mounting ((constructor, render), componentDidMount)
+    Updating (render, componentDidUpdate)
+    Unmounting (component­Will­Unmount)
+
+    -- Mounting --
+    constructor (dummy data)
+    render (dummy data)
+        HTML dummy
+    componentDidMount
+        API call
+        this.setState() -> state varaible is updated
+
+    -- Updating --
+        render (API data)
+        HTML with API data
+        componentDidUpdate
+
+    -- Unmounting --
+        componentWillUnmount
 
     - Render Phase (Pure and has no side effects. May be paused, aborted or restarted by React.)
     - Commit Phase (Can work with DOM, run side effects, schedule updates.)
+
 
     - Parent constructor
     - Parent render
@@ -294,3 +334,19 @@ Whenever a state variable updates, React will re-renders the component
         - Second Child componentDidMount
 
     - Parent componentDidMount
+
+# Lazy loading / Chunking / Code Splitting / Dynamic Bundling / Dynamic Import / On-demand Loading
+
+    lazy        -
+                    is a named inport react.
+                    is a function which takes a callback fn. in which we call import(). We have to give path of the component in import.
+
+    Suspense    -
+                    is a named inport from react.
+                    We wrap the component in <Suspense></Suspense>
+
+    import {lazy, Suspense} from 'react';
+
+    const Component = lazy(() => import ('./path));
+
+    <Suspense fallback={}><Component/></Suspense>

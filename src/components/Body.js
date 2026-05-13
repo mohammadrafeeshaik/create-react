@@ -1,48 +1,48 @@
 import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
-import { resList } from "../utils/mockData";
 import ShimmerUI from "./ShimmerUI";
 import { Link } from "react-router-dom";
+import useRestaurants from "../utils/useRestaurants";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
-  // mock data
-  // const [listOfRes, setListOfRes] = useState(resList);
-
-  // live data
-  const [listOfRes, setListOfRes] = useState([]);
-  // keep a copy of the full fetched list so we can restore on "Clear"
-  const [allRes, setAllRes] = useState([]);
+  const { listOfRes, allRes, isLoading, error } = useRestaurants();
+  const [filteredRes, setFilteredRes] = useState([]);
   const [searchText, setSearchText] = useState("");
-  // debounce timer id
   const [debounceTimer, setDebounceTimer] = useState(null);
+  const onlineStatus = useOnlineStatus();
 
-  const btnFilter = () => {
-    setListOfRes(allRes.filter((res) => res.info.avgRating > 4));
-  };
-
-  const btnClear = () => {
-    setListOfRes(allRes);
-  };
+  console.log(listOfRes);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    setFilteredRes(listOfRes);
+  }, [listOfRes]);
 
-  const fetchData = async () => {
-    const data = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.38430&lng=78.45830&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
-    );
-    const json = await data.json();
+  const handleSearchChange = (value) => {
+    setSearchText(value);
+    if (debounceTimer) clearTimeout(debounceTimer);
 
-    console.log(json);
+    const timer = setTimeout(() => {
+      const filtered = allRes.filter((res) =>
+        res?.info?.name?.toLowerCase().includes(value.toLowerCase()),
+      );
+      setFilteredRes(filtered);
+    }, 300);
 
-    const restaurants =
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants;
-
-    setAllRes(restaurants);
-    setListOfRes(restaurants);
+    setDebounceTimer(timer);
   };
+
+  const handleTopRated = () => {
+    setFilteredRes(allRes.filter((res) => res?.info?.avgRating > 4));
+  };
+
+  const handleClear = () => {
+    setFilteredRes(allRes);
+  };
+
+  if (!onlineStatus) {
+    return <h1>Looks like you're offline. Please check internet connection</h1>;
+  }
 
   return (
     <main>
@@ -52,36 +52,29 @@ const Body = () => {
             type="text"
             placeholder="Search"
             value={searchText}
-            onChange={(e) => {
-              const val = e.target.value;
-              setSearchText(val);
-              if (debounceTimer) clearTimeout(debounceTimer);
-              const timer = setTimeout(() => {
-                const filtered = allRes.filter((res) =>
-                  res?.info?.name?.toLowerCase().includes(val.toLowerCase()),
-                );
-                setListOfRes(filtered);
-              }, 300);
-              setDebounceTimer(timer);
-            }}
+            onChange={(e) => handleSearchChange(e.target.value)}
           />
         </div>
         <div>
-          <button onClick={btnFilter}>Top rated Restaurants</button>
-          <button onClick={btnClear}>Clear Filters</button>
+          <button onClick={handleTopRated}>Top rated Restaurants</button>
+          <button onClick={handleClear}>Clear Filters</button>
         </div>
       </div>
 
-      {listOfRes.length > 0 ? (
+      {isLoading ? (
+        <ShimmerUI />
+      ) : error ? (
+        <div>{error}</div>
+      ) : filteredRes.length > 0 ? (
         <ul className="restaurant-list">
-          {listOfRes.map((res) => (
-            <Link to={"/restaurants/" + res.info.id} key={res.info.id}>
+          {filteredRes.map((res) => (
+            <Link to={`/restaurants/${res.info.id}`} key={res.info.id}>
               <RestaurantCard resData={res} />
             </Link>
           ))}
         </ul>
       ) : (
-        <ShimmerUI />
+        <div>No restaurants found.</div>
       )}
     </main>
   );

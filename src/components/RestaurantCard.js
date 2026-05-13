@@ -25,10 +25,12 @@ const RestaurantCard = (props) => {
         <div className="restaurant-details">
           <h2>{name}</h2>
           <p>{areaName}</p>
-          <p className="restaurant-offer">
-            {aggregatedDiscountInfoV3?.header}{" "}
-            {aggregatedDiscountInfoV3?.subHeader}
-          </p>
+          {aggregatedDiscountInfoV3 && (
+            <p className="restaurant-offer">
+              {aggregatedDiscountInfoV3?.header}{" "}
+              {aggregatedDiscountInfoV3?.subHeader}
+            </p>
+          )}
           <p>{cuisines.join(", ")}</p>
           <p>{avgRating} Stars</p>
           <p>{costForTwo}</p>
